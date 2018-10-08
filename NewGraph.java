@@ -13,7 +13,7 @@ public class NewGraph {
       public void constructGraph() {
     	  for(int i = list.length-1; i>-1; i--) {
     		  Activity[] predecessor = list[i].getPredecessors();
-    		  for(int j = 0; j < predecessor.length; j++) {
+    		  for(int j = 0; j < predecessor.length - 1; j++) {
     			  if(searchNode(predecessor[j]) != -1) {
     				  addEdge(i, j);
     			  }
