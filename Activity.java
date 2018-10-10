@@ -38,4 +38,12 @@ public class Activity {
 	public Activity[] getPredecessors() {
 		return this.predecessors;
 	}
+	
+	public boolean isPredecessor(Activity second) {
+		for(int i = 0; i < this.predecessors.length; i++) {
+			if(this.predecessors[i] == second)
+				return true;
+		}
+		return false;
+	}
 }
