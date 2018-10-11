@@ -174,6 +174,19 @@ public class NewGraph {
     	
     	return s.toString();
     }
+
+    public void InsertionSort(ArrayList<ArrayList<Activity>> paths) {
+        for(int j = 1; j < paths.size(); j++) {
+            int key = calcPathDuration(paths.get(j));
+            int i = j-1;
+            
+            while(i >= 0 && calcPathDuration(paths.get(i)) > key) {
+                paths.set(i+1, paths.get(i));
+                i--;
+            }
+            paths.set(i+1, paths.get(j));
+        }
+    }
     
 
 }
