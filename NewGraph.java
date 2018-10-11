@@ -2,11 +2,18 @@ public class NewGraph {
       public boolean adjMatrix[][];
       public int numVertices;
       public Activity[] list;
+      public ArrayList<ArrayList<Activity>> paths = null;
+      public int[] errorList = new int[3];
  
       public NewGraph(Activity[] list) {
           this.numVertices = list.length;
           adjMatrix = new boolean[numVertices][numVertices];
           this.list = list;
+          constructGraph();
+          Activity end = getEnd();
+          if(end != null) {
+        	  this.paths = getPaths(end, null, -1);
+          }
           
           
     }
@@ -23,6 +30,30 @@ public class NewGraph {
     	  }
       }
       
+      //find the ending node of the network
+      public Activity findEnd() {
+    	  Activity end = null;
+		  boolean foundEnd = false;
+
+    	  for(int x = 0; x < numVertices; x++)
+    	  {
+    		  boolean isEnd = true;
+    		  for(int y = 0; y < numVertices; y++) {
+    			  if(adjMatrix[y][x] == 1)
+    				  isEnd = false;
+    		  }
+    		  if(isEnd == true && foundEnd == false) {
+    			  end = list[x];
+    			  foundEnd = true;
+    		  }
+    		  else if(isEnd == true && foundEnd == true)
+    			  errorList[0] = 1; //unconnected node error
+    	  }
+    	  if(end == null)
+    		  errorList[1] = 1; //loop error
+    	  return end;
+      }
+      
       public int searchNode(Activity p) {
     	  int index = -1;
     	  for (int i=0; i < list.length; i++) {
@@ -35,12 +66,12 @@ public class NewGraph {
  
       public void addEdge(int i, int j) {
                 adjMatrix[i][j] = true;
-                adjMatrix[j][i] = true;
+                //adjMatrix[j][i] = true;
     }
  
       public void removeEdge(int i, int j) {
                 adjMatrix[i][j] = false;
-                adjMatrix[j][i] = false;
+                //adjMatrix[j][i] = false;
     }
  
       public boolean isEdge(int i, int j) {
@@ -90,9 +121,10 @@ public class NewGraph {
 		currentPath.add(predecessors[0]);
 		paths.set(currentPathIndex, currentPath);
 		
-		if(end.getPredecessors().length != 0)
+		if(predecessors.length != 0 && currentPath.size() < list.length)
 			paths = getPaths(predecessors[0], paths, currentPathIndex);
-
+		else if(predecessors.length != 0 && currentPath.size() >= list.length)
+			errorList[1] = 1; //loop error
 		return paths;
     }
     
