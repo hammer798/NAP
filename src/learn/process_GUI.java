@@ -28,6 +28,7 @@ public class process_GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputTextArea = new javax.swing.JTextArea();
         outputLabel = new javax.swing.JLabel();
@@ -161,6 +162,7 @@ public class process_GUI extends javax.swing.JFrame {
     private javax.swing.JMenu help;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel outputLabel;
     private javax.swing.JTextArea outputTextArea;
