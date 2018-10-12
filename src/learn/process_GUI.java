@@ -14,7 +14,8 @@ public class process_GUI extends javax.swing.JFrame {
     /**
      * Creates new form Process_GUI
      */
-    public process_GUI() {
+    public process_GUI(String output) {
+    	this.output = output;
         initComponents();
     }
 
@@ -48,6 +49,8 @@ public class process_GUI extends javax.swing.JFrame {
         outputTextArea.setColumns(20);
         outputTextArea.setRows(5);
         jScrollPane1.setViewportView(outputTextArea);
+        
+        outputTextArea.setText(this.output);
 
         outputLabel.setText("Output:");
 
@@ -170,4 +173,6 @@ public class process_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem team;
     private javax.swing.JMenuItem userGuide;
     // End of variables declaration//GEN-END:variables
+    
+    private String output;
 }
