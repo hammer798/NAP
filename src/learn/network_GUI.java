@@ -21,6 +21,7 @@ public class network_GUI extends javax.swing.JFrame {
      * Creates new form network_GUI
      */
     public network_GUI() {
+        actArray = new ArrayList<Activity>();
         initComponents();
     }
 
@@ -54,7 +55,7 @@ public class network_GUI extends javax.swing.JFrame {
         project = new javax.swing.JMenuItem();
         members = new javax.swing.JMenuItem();
         help = new javax.swing.JMenu();
-        userGuide = new javax.swing.JMenuItem();
+        tips = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -120,22 +121,32 @@ public class network_GUI extends javax.swing.JFrame {
         about.setText("About");
 
         project.setText("Project");
+        project.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectActionPerformed(evt);
+            }
+        });
         about.add(project);
 
         members.setText("Team");
+        members.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                membersActionPerformed(evt);
+            }
+        });
         about.add(members);
 
         jMenuBar1.add(about);
 
         help.setText("Help");
 
-        userGuide.setText("User Guide");
-        userGuide.addActionListener(new java.awt.event.ActionListener() {
+        tips.setText("Tips for User");
+        tips.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userGuideActionPerformed(evt);
+                tipsActionPerformed(evt);
             }
         });
-        help.add(userGuide);
+        help.add(tips);
 
         jMenuBar1.add(help);
 
@@ -225,69 +236,9 @@ public class network_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void add1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add1BtnActionPerformed
-    	String activityName = act1Text.getText();
-    	String durationString = dur1Text.getText();
-    	String predecessors = pred1Text.getText();
-    	
-    	int duration = Integer.parseInt(durationString);
-    	if(duration < 0 || durationString.contains(".")){
-    		errorText.setText("The duration was invalid. The activity was not created.");
-    	}
-    	else
-    		actArray.add(new Activity(activityName, duration, predecessors));
-    	act1Text.setText("");
-    	dur1Text.setText("");
-    	pred1Text.setText("");    }//GEN-LAST:event_add1BtnActionPerformed
-
-    private void processBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processBtnActionPerformed
-    	Activity[] array = actArray.toArray();
-    	NewGraph network = new NewGraph(array);
-
-    	if(network.errorList[0] == 1)
-    		errorText.setText(errorText.getText() + "\n" + "Error 3: A node is unconnected.");
-    	if(network.errorList[1] == 1)
-    		errorText.setText(errorText.getText() + "\n" + "Error 7: The network contains a loop.");
-    	if(network.errorList[0] != 1 && network.errorList[1] != 1){
-    		network.InsertionSort(network.paths);
-    		String allPaths = "";
-    		for(int x = 0; x < network.paths.size(); x++){
-    			allPaths += network.printPath(network.paths.get(x));
-    			allPaths += "\n";
-    		}
-    	this.dispose();
-        process_GUI second = new process_GUI(allPaths);
-        second.setVisible(true);
-    	}
-    }//GEN-LAST:event_processBtnActionPerformed
-
-    private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
-        act1Text.setText("");
-        dur1Text.setText("");
-        pred1Text.setText("");
-        errorTextArea.setText("");
-        actArray = new ArrayList<Activity>();
-    }//GEN-LAST:event_restartBtnActionPerformed
-
-    private void userGuideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userGuideActionPerformed
-        
-        try{
-            Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler "+"/Users/melaniehendricks/Desktop/userGuide.pdf");
-        }catch (Exception e){
-            
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-        
-        
-    }//GEN-LAST:event_userGuideActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    private void addActionPerformed(java.awt.event.ActionEvent evt){
-    	String activityName = act1Text.getText();
-    	String durationString = dur1Text.getText();
-    	String predecessors = pred1Text.getText();
+        String activityName = act1Text.getText().trim();
+    	String durationString = dur1Text.getText().trim();
+    	String predecessors = pred1Text.getText().trim();
     	
     	int duration = Integer.parseInt(durationString);
     	if(duration < 0 || durationString.contains(".")){
@@ -298,26 +249,67 @@ public class network_GUI extends javax.swing.JFrame {
     	act1Text.setText("");
     	dur1Text.setText("");
     	pred1Text.setText("");
-    }
-    
-    private void processActionPerformed(java.awt.event.ActionEvent evt) {
-    	Activity[] array = actArray.toArray();
+    }//GEN-LAST:event_add1BtnActionPerformed
+
+    private void processBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processBtnActionPerformed
+        Activity[] array = new Activity[actArray.size()];
+        array = actArray.toArray(array);
     	NewGraph network = new NewGraph(array);
 
     	if(network.errorList[0] == 1)
     		errorTextArea.setText(errorTextArea.getText() + "\n" + "Error 3: A node is unconnected.");
     	if(network.errorList[1] == 1)
     		errorTextArea.setText(errorTextArea.getText() + "\n" + "Error 7: The network contains a loop.");
-    	if(network.errorList[0] != 1 && network.errorList[1] != 1){
+    	String allPaths = "";
+        if(network.errorList[0] != 1 && network.errorList[1] != 1){
     		network.InsertionSort(network.paths);
-    		String allPaths = "";
-    		for(int x = 0; x < network.paths.size(); x++){
-    			allPaths += network.printPath(network.paths.get(x));
+    		allPaths = "";
+    		for(int x = network.paths.size() - 1; x > -1; x--){
+                        Activity[] arr = new Activity[network.paths.get(x).size()];
+                        arr = network.paths.get(x).toArray(arr);
+    			allPaths += network.printPath(arr);
     			allPaths += "\n";
     		}
-    		//do stuff to change screen
-    	}
-    }
+            this.dispose();
+            process_GUI second = new process_GUI(allPaths);
+            second.setVisible(true);
+        }
+    }//GEN-LAST:event_processBtnActionPerformed
+
+    private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
+        act1Text.setText("");
+        dur1Text.setText("");
+        pred1Text.setText("");
+        errorTextArea.setText("");
+        actArray = new ArrayList<Activity>();
+    }//GEN-LAST:event_restartBtnActionPerformed
+
+    private void tipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipsActionPerformed
+        
+        help_GUI tips = new help_GUI();
+        tips.setVisible(true);
+        
+        
+    }//GEN-LAST:event_tipsActionPerformed
+
+    private void membersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_membersActionPerformed
+        
+        team_GUI team = new team_GUI();
+        team.setVisible(true);
+        
+        
+    }//GEN-LAST:event_membersActionPerformed
+
+    private void projectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectActionPerformed
+        project_GUI project = new project_GUI();
+        project.setVisible(true);
+    }//GEN-LAST:event_projectActionPerformed
+
+
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -372,8 +364,7 @@ public class network_GUI extends javax.swing.JFrame {
     private javax.swing.JButton processBtn;
     private javax.swing.JMenuItem project;
     private javax.swing.JButton restartBtn;
-    private javax.swing.JMenuItem userGuide;
+    private javax.swing.JMenuItem tips;
     // End of variables declaration//GEN-END:variables
-    
-    private ArrayList<Activity> actArray = new ArrayList<Activity>();
+    private ArrayList<Activity> actArray;
 }

@@ -43,11 +43,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Project"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="members">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Team"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="membersActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -56,12 +62,12 @@
             <Property name="text" type="java.lang.String" value="Help"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="userGuide">
+            <MenuItem class="javax.swing.JMenuItem" name="tips">
               <Properties>
-                <Property name="text" type="java.lang.String" value="User Guide"/>
+                <Property name="text" type="java.lang.String" value="Tips for User"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userGuideActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -1,4 +1,4 @@
-
+package learn;
 public class Activity {
 	
 	//fields
@@ -27,7 +27,14 @@ public class Activity {
 	}
 	
 	String[] parsePreds(String p) {
-		return p.split(",");	
+            String[] preds;
+            if(p.contains(","))
+                preds = p.split(",");
+            else{
+                preds = new String[1];
+                preds[0] = p.trim();
+            }
+            return preds; 
 	}
 	
 	//getters
@@ -45,7 +52,7 @@ public class Activity {
 	
 	public boolean isPredecessor(Activity second) {
 		for(int i = 0; i < this.predecessors.length; i++) {
-			if(this.predecessors[i] == second)
+			if(this.predecessors[i] == second.getName())
 				return true;
 		}
 		return false;

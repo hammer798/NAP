@@ -9,12 +9,12 @@ package learn;
  *
  * @author melaniehendricks
  */
-public class error_GUI extends javax.swing.JFrame {
+public class project_GUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form error_GUI
+     * Creates new form project_GUI
      */
-    public error_GUI() {
+    public project_GUI() {
         initComponents();
     }
 
@@ -27,27 +27,41 @@ public class error_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
         about = new javax.swing.JMenu();
-        project = new javax.swing.JMenuItem();
         team = new javax.swing.JMenuItem();
         help = new javax.swing.JMenu();
+        tips = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
+        jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("About the Program:\n\nThe NAP (Network Access Program) analyzes a network diagram and determines all paths in a network. It takes multiple occurrences of an activity name, duration, and list of predecessors (all entered manually) and parses this data to create a network diagram. It then determines each path in the network, and lists out the name of each activity in that path, along with the total duration of that path, in descending order. \n\nNAP also provides useful error checking. It can identify invalid inputs, unconnected nodes, and network loops. This information is displayed in the main window so the user can easily identify any errors. \n");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
 
         file.setText("File");
 
         exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
         file.add(exit);
 
         jMenuBar1.add(file);
 
         about.setText("About");
-
-        project.setText("Project");
-        about.add(project);
 
         team.setText("Team");
         team.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +74,15 @@ public class error_GUI extends javax.swing.JFrame {
         jMenuBar1.add(about);
 
         help.setText("Help");
+
+        tips.setText("Tips for User");
+        tips.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipsActionPerformed(evt);
+            }
+        });
+        help.add(tips);
+
         jMenuBar1.add(help);
 
         setJMenuBar(jMenuBar1);
@@ -68,19 +91,38 @@ public class error_GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void teamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamActionPerformed
-        // TODO add your handling code here:
+        team_GUI team = new team_GUI();
+        team.setVisible(true);
+        
     }//GEN-LAST:event_teamActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        network_GUI network = new network_GUI();
+        network.setVisible(true);
+    }//GEN-LAST:event_exitActionPerformed
+
+    private void tipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipsActionPerformed
+        help_GUI tips = new help_GUI();
+        tips.setVisible(true);
+        
+    }//GEN-LAST:event_tipsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,20 +141,20 @@ public class error_GUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(error_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(project_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(error_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(project_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(error_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(project_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(error_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(project_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new error_GUI().setVisible(true);
+                new project_GUI().setVisible(true);
             }
         });
     }
@@ -123,7 +165,9 @@ public class error_GUI extends javax.swing.JFrame {
     private javax.swing.JMenu file;
     private javax.swing.JMenu help;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem project;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuItem team;
+    private javax.swing.JMenuItem tips;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,18 +9,13 @@ package learn;
  *
  * @author melaniehendricks
  */
-public class process_GUI extends javax.swing.JFrame {
+public class team_GUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form Process_GUI
+     * Creates new form error_GUI
      */
-    public process_GUI(){
+    public team_GUI() {
         initComponents();
-    }
-    public process_GUI(String output) {
-    	this.output = output;
-        initComponents();
-        outputTextArea.setText(output);
     }
 
     /**
@@ -32,12 +27,8 @@ public class process_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        outputTextArea = new javax.swing.JTextArea();
-        outputLabel = new javax.swing.JLabel();
-        restartBtn = new javax.swing.JButton();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
@@ -47,29 +38,22 @@ public class process_GUI extends javax.swing.JFrame {
         help = new javax.swing.JMenu();
         tips = new javax.swing.JMenuItem();
 
-        jMenuItem1.setText("jMenuItem1");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Developers");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
 
-        outputTextArea.setColumns(20);
-        outputTextArea.setRows(5);
-        jScrollPane1.setViewportView(outputTextArea);
-
-        outputLabel.setText("Output:");
-
-        restartBtn.setText("Restart");
-        restartBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restartBtnActionPerformed(evt);
-            }
-        });
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
+        jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Developers:\n\nIan Bradley: Computer Science, Sophomore\n\nMelanie Hendricks: Computer Science, Junior \n\nCole Stanfield: Computer Science, Junior ");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
 
         file.setText("File");
-        file.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileActionPerformed(evt);
-            }
-        });
 
         exit.setText("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +76,11 @@ public class process_GUI extends javax.swing.JFrame {
         about.add(project);
 
         team.setText("Team");
+        team.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teamActionPerformed(evt);
+            }
+        });
         about.add(team);
 
         jMenuBar1.add(about);
@@ -114,46 +103,30 @@ public class process_GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(restartBtn)))
-                .addContainerGap(109, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(outputLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(restartBtn)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
+    private void teamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fileActionPerformed
+    }//GEN-LAST:event_teamActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-       System.exit(0); 
+        network_GUI network = new network_GUI();
+        network.setVisible(true);
+        
+        
     }//GEN-LAST:event_exitActionPerformed
-
-    private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
-        this.dispose();
-        network_GUI first = new network_GUI();
-        first.setVisible(true);
-    }//GEN-LAST:event_restartBtnActionPerformed
 
     private void projectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectActionPerformed
         project_GUI project = new project_GUI();
@@ -164,7 +137,6 @@ public class process_GUI extends javax.swing.JFrame {
     private void tipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipsActionPerformed
         help_GUI tips = new help_GUI();
         tips.setVisible(true);
-        
         
     }//GEN-LAST:event_tipsActionPerformed
 
@@ -185,13 +157,13 @@ public class process_GUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(process_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(team_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(process_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(team_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(process_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(team_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(process_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(team_GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -199,7 +171,7 @@ public class process_GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new process_GUI().setVisible(true);
+                new team_GUI().setVisible(true);
             }
         });
     }
@@ -210,16 +182,10 @@ public class process_GUI extends javax.swing.JFrame {
     private javax.swing.JMenu file;
     private javax.swing.JMenu help;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel outputLabel;
-    private javax.swing.JTextArea outputTextArea;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuItem project;
-    private javax.swing.JButton restartBtn;
     private javax.swing.JMenuItem team;
     private javax.swing.JMenuItem tips;
     // End of variables declaration//GEN-END:variables
-    
-    private String output;
 }
