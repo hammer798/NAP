@@ -237,6 +237,7 @@ public class network_GUI extends javax.swing.JFrame {
     			allPaths += "\n";
     		}
     		//do stuff to change screen
+    	}
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
