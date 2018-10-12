@@ -222,7 +222,9 @@ public class network_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_add1BtnActionPerformed
 
     private void processBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processBtnActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        process_GUI second = new process_GUI();
+        second.setVisible(true);
     }//GEN-LAST:event_processBtnActionPerformed
 
     private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
@@ -324,6 +326,5 @@ public class network_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem project;
     private javax.swing.JButton restartBtn;
     private javax.swing.JMenuItem userGuide;
-    private ArrayList<Activity> actArray = new ArrayList<Activity>();
     // End of variables declaration//GEN-END:variables
 }

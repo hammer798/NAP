@@ -1,3 +1,7 @@
+package learn;
+
+import java.util.ArrayList;
+
 public class NewGraph {
       public boolean adjMatrix[][];
       public int numVertices;
