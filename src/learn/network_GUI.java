@@ -293,6 +293,5 @@ public class network_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem project;
     private javax.swing.JMenuItem userGuide;
     private ArrayList<Activity> actArray = new ArrayList<Activity>();
-    private NewGraph = null;
     // End of variables declaration//GEN-END:variables
 }
