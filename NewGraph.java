@@ -3,14 +3,14 @@ public class NewGraph {
       public int numVertices;
       public Activity[] list;
       public ArrayList<ArrayList<Activity>> paths = null;
-      public int[] errorList = new int[3];
+      public int[] errorList = new int[2];
  
       public NewGraph(Activity[] list) {
           this.numVertices = list.length;
           adjMatrix = new boolean[numVertices][numVertices];
           this.list = list;
           constructGraph();
-          Activity end = getEnd();
+          Activity end = findEnd();
           if(end != null) {
         	  this.paths = getPaths(end, null, -1);
           }
@@ -19,7 +19,7 @@ public class NewGraph {
     }
       public void constructGraph() {
     	  for(int i = list.length-1; i>-1; i--) {
-    		  Activity[] predecessor = list[i].getPredecessors();
+    		  Activity[] predecessor = convertPredecessors(list[i]);
     		  for(int j = 0; j < predecessor.length - 1; j++) {
     			  if(searchNode(predecessor[j]) != -1) {
     				  addEdge(i, searchNode(predecessor[j]));
@@ -39,7 +39,7 @@ public class NewGraph {
     	  {
     		  boolean isEnd = true;
     		  for(int y = 0; y < numVertices; y++) {
-    			  if(adjMatrix[y][x] == 1)
+    			  if(adjMatrix[y][x] == true)
     				  isEnd = false;
     		  }
     		  if(isEnd == true && foundEnd == false) {
@@ -54,6 +54,14 @@ public class NewGraph {
     	  return end;
       }
       
+      public Activity[] convertPredecessors(Activity node) {
+    	  Activity[] predecessors = new Activity[node.getPredecessors().length];
+    	  for(int x = 0; x < node.getPredecessors().length; x++) {
+    		  predecessors[x] = findActivity(node.getPredecessors()[x].getName());
+    	  }
+    	  return predecessors;   	  
+      }
+      
       public int searchNode(Activity p) {
     	  int index = -1;
     	  for (int i=0; i < list.length; i++) {
@@ -62,6 +70,13 @@ public class NewGraph {
     		  }
     	  }
     	  return index;
+      }
+      
+      public Activity findActivity(String name) {
+    	  for(int i = 0; i < list.length; i++) {
+    		  if(list[i].getName().equals(name))
+    			  return list[i];
+    	  }
       }
  
       public void addEdge(int i, int j) {
@@ -98,22 +113,24 @@ public class NewGraph {
     	if(paths == null)
     		paths = new ArrayList<ArrayList<Activity>>();
     	
+    	ArrayList<Activity> currentPath;
+    	
     	if(currentPathIndex == -1)
     	{
     		currentPathIndex = 0;
-    		ArrayList<Activity> currentPath = new ArrayList<Activity>();
+    		currentPath = new ArrayList<Activity>();
     		currentPath.add(end);
     		paths.add(currentPath);
     	}
     	else
     		currentPath = paths.get(currentPathIndex);
     	
-    	Activitiy[] predecessors = end.getPredecessors();	
+    	Activity[] predecessors = convertPredecessors(end);	
     	
     	//adds the current nodes predecessors to new paths if necessary, calls the function recursively
     	//yes, the big O on this is atrocious, but it should work
 		for(int x = 1; x < predecessors.length; x++) {
-			ArrayList<Activity> newPath = currentPath;
+			ArrayList<Activity> newPath = new ArrayList<Activity>(currentPath);
 			newPath.add(predecessors[x]);
 			paths.add(newPath);
 			paths = getPaths(predecessors[x], paths, paths.size()-1);
@@ -156,6 +173,19 @@ public class NewGraph {
     	s.append(calcPathDuration(path));
     	
     	return s.toString();
+    }
+
+    public void InsertionSort(ArrayList<ArrayList<Activity>> paths) {
+        for(int j = 1; j < paths.size(); j++) {
+            int key = calcPathDuration(paths.get(j));
+            int i = j-1;
+            
+            while(i >= 0 && calcPathDuration(paths.get(i)) > key) {
+                paths.set(i+1, paths.get(i));
+                i--;
+            }
+            paths.set(i+1, paths.get(j));
+        }
     }
     
 

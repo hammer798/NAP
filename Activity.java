@@ -4,13 +4,13 @@ public class Activity {
 	//fields
 	private String name;
 	private int duration;
-	private Activity[] predecessors;
+	private String[] predecessors;
 	
 	//constructor, takes string, int, and array of activities
-	public Activity(String n, int d, Activity[] p) {
+	public Activity(String n, int d, String p) {
 		this.name = n; //cannot be null
 		this.duration = d; //need to error check this, can only be positive		
-		this.predecessors = p;
+		this.predecessors = parsePreds(p);
 	}
 	
 	//setters
@@ -22,8 +22,12 @@ public class Activity {
 		this.duration = d;
 	}
 	
-	public void setPredecessors(Activity[] p) {
-		this.predecessors = p;
+	public void setPredecessors(String p) {
+		this.predecessors = parsePreds(p);
+	}
+	
+	String[] parsePreds(String p) {
+		return p.split(",");	
 	}
 	
 	//getters
@@ -35,7 +39,7 @@ public class Activity {
 		return this.duration;
 	}
 	
-	public Activity[] getPredecessors() {
+	public String[] getPredecessors() {
 		return this.predecessors;
 	}
 	
