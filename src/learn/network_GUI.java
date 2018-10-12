@@ -218,13 +218,39 @@ public class network_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void add1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add1BtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_add1BtnActionPerformed
+    	String activityName = act1Text.getText();
+    	String durationString = dur1Text.getText();
+    	String predecessors = pred1Text.getText();
+    	
+    	int duration = Integer.parseInt(durationString);
+    	if(duration < 0 || durationString.contains(".")){
+    		errorText.setText("The duration was invalid. The activity was not created.");
+    	}
+    	else
+    		actArray.add(new Activity(activityName, duration, predecessors));
+    	act1Text.setText("");
+    	dur1Text.setText("");
+    	pred1Text.setText("");    }//GEN-LAST:event_add1BtnActionPerformed
 
     private void processBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processBtnActionPerformed
-        this.dispose();
-        process_GUI second = new process_GUI();
+    	Activity[] array = actArray.toArray();
+    	NewGraph network = new NewGraph(array);
+
+    	if(network.errorList[0] == 1)
+    		errorText.setText(errorText.getText() + "\n" + "Error 3: A node is unconnected.");
+    	if(network.errorList[1] == 1)
+    		errorText.setText(errorText.getText() + "\n" + "Error 7: The network contains a loop.");
+    	if(network.errorList[0] != 1 && network.errorList[1] != 1){
+    		network.InsertionSort(network.paths);
+    		String allPaths = "";
+    		for(int x = 0; x < network.paths.size(); x++){
+    			allPaths += network.printPath(network.paths.get(x));
+    			allPaths += "\n";
+    		}
+    	this.dispose();
+        process_GUI second = new process_GUI(allPaths);
         second.setVisible(true);
+    	}
     }//GEN-LAST:event_processBtnActionPerformed
 
     private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
@@ -329,4 +355,6 @@ public class network_GUI extends javax.swing.JFrame {
     private javax.swing.JButton restartBtn;
     private javax.swing.JMenuItem userGuide;
     // End of variables declaration//GEN-END:variables
+    
+    private ArrayList<Activity> actArray = new ArrayList<Activity>();
 }
