@@ -229,6 +229,8 @@ public class network_GUI extends javax.swing.JFrame {
         act1Text.setText("");
         dur1Text.setText("");
         pred1Text.setText("");
+        errorTextArea.setText("");
+        actArray = new ArrayList<Activity>();
     }//GEN-LAST:event_restartBtnActionPerformed
 
     /**

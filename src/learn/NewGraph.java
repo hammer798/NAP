@@ -11,7 +11,8 @@ public class NewGraph {
           this.list = list;
           constructGraph();
           Activity end = findEnd();
-          if(end != null) {
+          Activity start = findStart();
+          if(end != null && start != null) {
         	  this.paths = getPaths(end, null, -1);
           }
           
@@ -52,6 +53,28 @@ public class NewGraph {
     	  if(end == null)
     		  errorList[1] = 1; //loop error
     	  return end;
+      }
+      
+      public Activity findStart() {
+    	  Activity start = null;
+    	  boolean foundStart = false;
+    	  
+    	  for(int x = 0; x < numVertices; x++) {
+    		  boolean isStart = true;
+    		  for(int y = 0; y < numVertices; y++) {
+    			  if(adjMatrix[x][y] == true)
+    				  isStart = false;
+    		  }
+    		  if(isStart == true && foundStart == false) {
+    			  start = list[x];
+    			  foundStart = true;
+    		  }
+    		  else if(isStart == true && foundStart == true)
+    			  errorList[0] = 1; //unconnected node error
+    	  }
+    	  if(start == null)
+    		  errorList[1] = 1; //loop error
+    	  return start;
       }
       
       public Activity[] convertPredecessors(Activity node) {
