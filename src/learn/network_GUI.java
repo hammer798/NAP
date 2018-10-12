@@ -74,7 +74,12 @@ public class network_GUI extends javax.swing.JFrame {
         predecessorLabel.setText("Predecessor");
 
         add1Btn.setText("Add");
-
+        add1Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        
         errorsLabel.setText("Errors:");
 
         errorTextArea.setColumns(20);
@@ -199,6 +204,40 @@ public class network_GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    private void addActionPerformed(java.awt.event.ActionEvent evt){
+    	String activityName = act1Text.getText();
+    	String durationString = dur1Text.getText();
+    	String predecessors = pred1Text.getText();
+    	
+    	int duration = Integer.parseInt(durationString);
+    	if(duration < 0 || durationString.contains(".")){
+    		errorText.setText("Error 9: The duration was invalid. The activity was not created.");
+    	}
+    	else
+    		actArray.add(new Activity(activityName, duration, predecessors));
+    	act1Text.setText("");
+    	dur1Text.setText("");
+    	pred1Text.setText("");
+    }
+    
+    private void processActionPerformed(java.awt.event.ActionEvent evt) {
+    	Activity[] array = actArray.toArray();
+    	NewGraph network = new NewGraph(array);
+
+    	if(network.errorList[0] == 1)
+    		errorText.setText(errorText.getText() + "\n" + "Error 3: A node is unconnected.");
+    	if(network.errorList[1] == 1)
+    		errorText.setText(errorText.getText() + "\n" + "Error 7: The network contains a loop.");
+    	if(network.errorList[0] != 1 && network.errorList[1] != 1){
+    		network.InsertionSort(network.paths);
+    		String allPaths = "";
+    		for(int x = 0; x < network.paths.size(); x++){
+    			allPaths += network.printPath(network.paths.get(x));
+    			allPaths += "\n";
+    		}
+    		//do stuff to change screen
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -252,5 +291,7 @@ public class network_GUI extends javax.swing.JFrame {
     private javax.swing.JLabel predecessorLabel;
     private javax.swing.JMenuItem project;
     private javax.swing.JMenuItem userGuide;
+    private ArrayList<Activity> actArray = new ArrayList<Activity>();
+    private NewGraph = null;
     // End of variables declaration//GEN-END:variables
 }
