@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.LinkedList;
 
 public class Graph {
 	 int size; 
@@ -39,23 +38,6 @@ public class Graph {
     	}
     	 
     	 
-    	 
-    	 
-    	 
-    	 
-    	 /*for(int i = 0; i < size; i++) {
-    		 for(int j = 0; j < size; j++) {
-    		 
-	    		 String temp[] = arr[j].getPredecessors();		//copy predecessors into temp string array used for comparison
-	    		 
-	    		 for(int z = 0; z < temp.length; z++) {			//Compares predecessors list with current node to see if they are linked together
-		    		 if(adjListArray[i].getFirst().getName() == temp[z]) {
-		    			 adjListArray[i].add(findActivity(temp[z])); 		//Searches for activity and adds it to linked list
-		    		 }
-	    		 }
-    		 }
-    	 }
-    	 */
      }
      
      public void addActivity(Activity temp, Activity add) {
@@ -83,6 +65,59 @@ public class Graph {
     	 
     	 return temp;
      }
+     
+     
+     
+     public void printPaths(int first, int last)  
+     { 
+         boolean[] isVisited = new boolean[size]; 
+         ArrayList<Activity> pathList = new ArrayList(); 
+           
+         //add source to path[] 
+         pathList.add(adjListArray[first].getFirst()); 
+           
+         //Call recursive utility 
+         printAllPathsUtil(first, last, isVisited, pathList); 
+     } 
+     private void printAllPathsUtil(int first, int last, boolean[] isVisited, List<Activity> localPathList) { 
+
+		// Mark the current node 
+		isVisited[first] = true; 
+		
+		if (first == last)  { 
+			System.out.println(localPathList); 
+		} 
+		
+		// Recur for all the vertices 
+		// adjacent to current vertex 
+		for (int i=1; i < adjListArray[first].size(); i++)  { 
+			if (!isVisited[searchIndex(adjListArray[first].get(i))]){ 
+			// store current node  
+			// in path[] 
+			localPathList.add(adjListArray[first].get(i)); 
+			printAllPathsUtil(searchIndex(adjListArray[first].get(i)), last, isVisited, localPathList); 
+			
+			// remove current node 
+			// in path[] 
+			localPathList.remove(i); 
+			} 
+		} 
+		
+			// Mark the current node 
+			isVisited[first] = false; 
+		}
+     
+     
+     public int searchIndex(Activity a) {
+    	 for(int i = 0; i < size; i++) {
+    		 if(adjListArray[i].getFirst().getName() == a.getName()) {
+    			 return i;
+    		 }
+    	 }
+    	 return -1;
+     }
+     
+     
      
      public void printGraph() {
     	 
