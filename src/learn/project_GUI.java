@@ -110,18 +110,21 @@ public class project_GUI extends javax.swing.JFrame {
     private void teamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamActionPerformed
         team_GUI team = new team_GUI();
         team.setVisible(true);
+        this.dispose();
+        this.setVisible(false);
         
     }//GEN-LAST:event_teamActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        network_GUI network = new network_GUI();
-        network.setVisible(true);
+        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
     private void tipsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipsActionPerformed
         help_GUI tips = new help_GUI();
         tips.setVisible(true);
-        
+        this.dispose();
+        this.setVisible(false);        
     }//GEN-LAST:event_tipsActionPerformed
 
     /**

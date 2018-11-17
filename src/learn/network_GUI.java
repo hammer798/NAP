@@ -69,7 +69,7 @@ public class network_GUI extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("GUI");
+        setTitle("Network Analysis Program");
 
         manualEntry.setText("Manual Entry:");
 
@@ -249,6 +249,7 @@ public class network_GUI extends javax.swing.JFrame {
     	act1Text.setText("");
     	dur1Text.setText("");
     	pred1Text.setText("");
+        errorTextArea.setText("");
     }//GEN-LAST:event_add1BtnActionPerformed
 
     private void processBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processBtnActionPerformed

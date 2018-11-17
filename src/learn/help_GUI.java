@@ -44,7 +44,7 @@ public class help_GUI extends javax.swing.JFrame {
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Helpful Tips for User\n\n\tInput Requirements:\n\nActivity\n- no commas\n\nDuration\n- single positive, non-zero integer \n\nPredecessors \n- if none, leave blank\n- if more than one, separated by comma\n\n\n\tButton Information:\n\nAdd\n- select to add activity (activity, duration, predecessor(s)) \n\nRestart\n- select to clear input boxes \n\nProcess\n- select to process the network and return paths with duration (descending order) \n\n\n");
+        jTextArea1.setText("Helpful Tips for User\n\n\tInput Requirements:\n\nActivity\n- no commas\n\nDuration\n- single positive, non-zero integer \n\nPredecessors \n- if none, leave blank\n- if more than one, separated by comma\n\n\n\tButton Information:\n\n\n[Main Screen]\n\nAdd\n- select to add activity (activity, duration, predecessor(s)) \n\nRestart\n- select to clear input boxes \n\nProcess\n- select to process the network and return paths with duration (descending order) \n\n\n[Process Screen] \n\nEdit Duration\n- Click “Change” to update the activity with its new duration. \n\nSave As\n- Open -> Documents -> CSE_360_PICKME\n- Click Save\n- Your file will be saved as a .txt file \n\nReprocess\n- Select to configure new network diagram with most recent changes implemented. \n\nTo exit while on this screen, click the red circle in the top left corner.  ");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -105,17 +105,21 @@ public class help_GUI extends javax.swing.JFrame {
     private void projectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectActionPerformed
         project_GUI project = new project_GUI();
         project.setVisible(true);
+        this.dispose();
+        this.setVisible(false);
         
     }//GEN-LAST:event_projectActionPerformed
 
     private void teamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamActionPerformed
         team_GUI team = new team_GUI();
         team.setVisible(true);
+        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_teamActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        network_GUI network = new network_GUI();
-        network.setVisible(true);
+        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
     /**

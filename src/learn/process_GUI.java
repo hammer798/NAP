@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package learn;
 
+package learn;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
 /**
  *
  * @author melaniehendricks
@@ -34,10 +37,12 @@ public class process_GUI extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jOptionPane1 = new javax.swing.JOptionPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        outputText = new javax.swing.JScrollPane();
         outputTextArea = new javax.swing.JTextArea();
         outputLabel = new javax.swing.JLabel();
         restartBtn = new javax.swing.JButton();
+        editDurBtn = new javax.swing.JButton();
+        saveAsBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
         exit = new javax.swing.JMenuItem();
@@ -50,10 +55,12 @@ public class process_GUI extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Network Access Program");
 
         outputTextArea.setColumns(20);
         outputTextArea.setRows(5);
-        jScrollPane1.setViewportView(outputTextArea);
+        outputText.setViewportView(outputTextArea);
+        outputTextArea.getAccessibleContext().setAccessibleName("");
 
         outputLabel.setText("Output:");
 
@@ -61,6 +68,20 @@ public class process_GUI extends javax.swing.JFrame {
         restartBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 restartBtnActionPerformed(evt);
+            }
+        });
+
+        editDurBtn.setText("Edit Duration");
+        editDurBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editDurBtnActionPerformed(evt);
+            }
+        });
+
+        saveAsBtn.setText("Save As");
+        saveAsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsBtnActionPerformed(evt);
             }
         });
 
@@ -118,13 +139,20 @@ public class process_GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputLabel)))
+                        .addComponent(outputLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(restartBtn)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(outputText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(editDurBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(restartBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveAsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +160,13 @@ public class process_GUI extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(outputLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(restartBtn)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(outputText, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editDurBtn)
+                    .addComponent(restartBtn)
+                    .addComponent(saveAsBtn))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,6 +198,19 @@ public class process_GUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_tipsActionPerformed
+
+    private void editDurBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDurBtnActionPerformed
+        edit_GUI edit = new edit_GUI();
+        edit.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_editDurBtnActionPerformed
+
+    private void saveAsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsBtnActionPerformed
+
+        saveFile_GUI save = new saveFile_GUI(output);
+        save.setVisible(true);
+      
+    }//GEN-LAST:event_saveAsBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,17 +250,19 @@ public class process_GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu about;
+    private javax.swing.JButton editDurBtn;
     private javax.swing.JMenuItem exit;
     private javax.swing.JMenu file;
     private javax.swing.JMenu help;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JOptionPane jOptionPane1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel outputLabel;
-    private javax.swing.JTextArea outputTextArea;
+    private javax.swing.JScrollPane outputText;
+    public javax.swing.JTextArea outputTextArea;
     private javax.swing.JMenuItem project;
     private javax.swing.JButton restartBtn;
+    private javax.swing.JButton saveAsBtn;
     private javax.swing.JMenuItem team;
     private javax.swing.JMenuItem tips;
     // End of variables declaration//GEN-END:variables

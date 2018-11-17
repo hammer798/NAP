@@ -142,7 +142,7 @@ public class NewGraph {
     }
 
     
-    //starts at ending node, orignally called with paths = null, currentPathIndex = -1
+    //starts at ending node, origInally called with paths = null, currentPathIndex = -1
     public  ArrayList<ArrayList<Activity>> getPaths(Activity end, ArrayList<ArrayList<Activity>> paths, int currentPathIndex){
     	int endIndex = searchNode(end);
     	
